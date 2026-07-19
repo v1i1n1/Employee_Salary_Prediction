@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Salary Prediction</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Employee Salary Prediction</h1>
+
+        <form action="/predict" method="POST">
+
+            <label>Education</label>
+
+            <select name="education" required>
+
+                <option value="">Select Education</option>
+                <option value="0">B.Tech</option>
+                <option value="1">M.Tech</option>
+                <option value="2">MCA</option>
+
+            </select>
+
+            <label>Experience (Years)</label>
+
+            <input
+                type="number"
+                name="experience"
+                step="0.1"
+                placeholder="Enter Experience"
+                required
+            >
+
+            <label>Skill Score</label>
+
+            <input
+                type="number"
+                name="skill_score"
+                min="0"
+                max="100"
+                placeholder="Enter Skill Score"
+                required
+            >
+
+            <button type="submit">Predict Salary</button>
+
+        </form>
+
+        {% if prediction %}
+
+        <div class="result">
+
+            <h2>Predicted Salary</h2>
+
+            <h3>₹ {{ prediction }}</h3>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
