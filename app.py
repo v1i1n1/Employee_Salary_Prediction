@@ -33,10 +33,25 @@ def predict():
     experience = float(request.form["experience"])
     skill_score = int(request.form["skill_score"])
 
+    if skill_score < 0 or skill_score > 100:
+        return render_template(
+        "index.html",
+        prediction="Skill Score must be between 0 and 100."
+    )
+
+    if experience < 0 or experience > 40:
+        return render_template(
+        "index.html",
+        prediction="Experience must be between 0 and 40 years."
+    )
+
     # Feature Engineering
 
     performance_index = experience * skill_score
-    learning_efficiency = skill_score / experience
+    if experience == 0:
+        learning_efficiency = 0
+    else:
+        learning_efficiency = skill_score / experience
 
     # Create DataFrame
 
